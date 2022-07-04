@@ -65,7 +65,9 @@ async def handle_report_album_attachment(message: types.Message,
     data['file_url'] = ' '.join(file_urls)
     data['user_id'] = message.from_user.id
     report = create_report(session, data)
-    await save_report(report.json())
+    await save_report(report.json(indent=4,
+                                  ensure_ascii=False,
+                                  sort_keys=False))
     await message.answer(text='Обращение успешно сформировано!',
                          reply_markup=back_markup)
     await state.finish()
@@ -84,7 +86,9 @@ async def handle_report_single_attachment(message: types.Message,
     data['file_url'] = await message.photo[-1].get_url()
     data['user_id'] = message.from_user.id
     report = create_report(session, data)
-    await save_report(report.json())
+    await save_report(report.json(indent=4,
+                                  ensure_ascii=False,
+                                  sort_keys=False))
     await message.answer(text='Обращение успешно сформировано!',
                          reply_markup=back_markup)
     await state.finish()
