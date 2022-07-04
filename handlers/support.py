@@ -56,7 +56,7 @@ async def handle_report_album_attachment(message: types.Message,
     session = next(get_session())
     data = await state.get_data()
     try:
-        data.get('prev').delete()
+        await data.get('prev').delete()
     except MessageToDeleteNotFound:
         pass
     file_urls = [
@@ -78,7 +78,7 @@ async def handle_report_single_attachment(message: types.Message,
     data = await state.get_data()
     session = next(get_session())
     try:
-        data.get('prev').delete()
+        await data.get('prev').delete()
     except MessageToDeleteNotFound:
         pass
     data['file_url'] = await message.photo[-1].get_url()

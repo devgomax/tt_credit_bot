@@ -59,7 +59,7 @@ async def handle_credit_sum(message: types.Message, state: FSMContext):
     session.add_all([bank, credit])
     session.commit()
     try:
-        data.get('prev').delete()
+        await data.get('prev').delete()
     except MessageToDeleteNotFound:
         pass
     await message.answer(text='Информация по кредиту обновлена!',
